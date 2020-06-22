@@ -1,4 +1,4 @@
-This script uses Newspaper by Lucas Ou-Yang:
+This script uses Newspaper by Lucas Ou-Yang.
 
 It is intended for use with Pocket, which allows you to export your articles as an html file. However, due to the way the URLs are parsed, it may work with other text files that contain URLs.
 
