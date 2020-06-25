@@ -1,70 +1,99 @@
-try:
-    from newspaper import Article
-except:
-    ("Newspaper not installed. Try: pip3 install newspaper3k")
+from newspaper import Article
+
+def match_source(article, sources):
+    for source in sources:
+        if source.lower() in article.url.lower():
+            return True
+    return False
+
+
+def match_keyword(article, keywords):
+    for keyword in keywords:
+        if keyword.lower() in article.url.lower():
+            return True
+
+        for keyword in keywords:
+            if keyword.lower() in article.title.lower():
+                return True
+        return False
+
 
 class article_archive:
 
     def __init__(self, urls):
         self.articles = []
         unique_urls = set(urls)
+
         for url in unique_urls:
-            self.articles.append(Article(url))
+            article = Article(url)
+            self.articles.append(article)
 
-    def filter_sources(self, allowed_sources_path):
-        with open(allowed_sources_path, 'r') as f:
-            sources = f.read().splitlines()
-            print("Selecting articles from:")
-            for source in sources:
-                print("\t" + source)
-            filtered_articles = []
-            for article in self.articles:
-                for source in sources:
-                    if source in article.url:
-                        filtered_articles.append(article)
-            self.articles = filtered_articles
 
-    def to_csv(self, filename):
-        with open(filename, 'w') as f:
-            i = 1
-            print("Downloading and parsing " + str(len(self.articles)) + " articles. This may take a while...")
+    def filter(self, sources_path, keywords_path):
+        sources = []
+        keywords = []
+        filtered_articles = []
 
-            f.write("title,date,authors,url\n")
+        try:
+            sources = open(sources_path, 'r').read().splitlines()
+            keywords = open(keywords_path, 'r').read().splitlines()
+        except:
+            print("Could not open required sources.txt or keywords.txt!")
+            exit()
 
-            for article in self.articles:
+        print("Accepted sources:")
+        for source in sources:
+            print("\t"+source)
+        print("\nAccepted keywords:")
+        for keyword in keywords:
+            print("\t"+keyword)
+        print('')
 
-                percent = i/len(self.articles)
-                print("{:.1%} complete".format(percent), end='\r')
-                i = i + 1
+        i = 0
+        s = 0
+        d = 0
+        f = 0
+        for article in self.articles:
+            print('Progress: {:.1%}'.format(i/len(self.articles)), end='\r')
+            i += 1
+            try:
+                article.download()
+                article.parse()
+            except:
+                s += 1
+                continue
+            if match_source(article, sources) or match_keyword(article, keywords):
+                filtered_articles.append(article)
+                f += 1
+            else:
+                d += 1
 
-                try:
-                    article.download()
-                    article.parse()
-                except:
-                    f.write(",,," + article.url + "\n")
-                    continue
+        print("{} saved, {} discarded, and {} skipped.".format(f, d, s))
+        return filtered_articles
 
-                title = article.title
-                for char in title:
-                    if ord(char) > 127 or ord(char) < 32:
-                        title = title.replace(char, "")
-                title = title.replace(",", "")
-                f.write(title + ",")
 
-                if article.publish_date is not None:
-                    f.write(\
-                        str(article.publish_date.month) + "/" +\
-                        str(article.publish_date.day) + "/" +\
-                        str(article.publish_date.year) + ",")
-                else:
-                    f.write(",")
+def to_csv(articles, filename):
+    with open(filename, 'w') as f:
 
-                for j in range(0, len(article.authors)):
-                    f.write(article.authors[j])
-                    if len(article.authors) > 1 and j < len(article.authors)-1:
-                        f.write("; ")
-                f.write(",")
+        f.write("title,date,authors,url\n")
 
-                f.write(article.url + "\n")
-            print("\nDone! Output saved to " + filename + ".")
+        for article in articles:
+            f.write("\"" + article.title + "\",")
+
+            if article.publish_date is not None:
+                f.write(\
+                    str(article.publish_date.month) + "/" +\
+                    str(article.publish_date.day) + "/" +\
+                    str(article.publish_date.year) + ",")
+            else:
+                f.write(",\"")
+
+            for j in range(0, len(article.authors)):
+                f.write(article.authors[j])
+                if len(article.authors) > 1 and j < len(article.authors)-1:
+                    f.write(", ")
+            f.write("\",")
+
+            f.write(article.url + "\n")
+        print("Output saved to " + filename + ".")
 
