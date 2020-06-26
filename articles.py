@@ -84,7 +84,7 @@ def to_csv(articles, filename):
                 f.write(\
                     str(article.publish_date.month) + "/" +\
                     str(article.publish_date.day) + "/" +\
-                    str(article.publish_date.year) + ",")
+                    str(article.publish_date.year) + ",\"")
             else:
                 f.write(",\"")
 
