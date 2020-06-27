@@ -7,13 +7,13 @@ Export your Pocket reading list as a CSV file.
 
 ### SET-UP ###
 - Run ./setup.sh to install dependencies.
-- Consider adding ./article-export to your PATH and alias article-export="python3 export.py" so you can use 'article-export' as a bash command.
-- Generate a new consumer ID at https://getpocket.com/developer/
+- Consider adding alias article-export="python3 <this_repo>/article-export/export.py" to your .bashrc to effectively "install" the script.
+- Generate a new consumer ID at https://getpocket.com/developer/.
     - Create new app.
     - Give it a name (i.e. article-archiver).
     - Give it a description.
-    - Under permissions, check 'Retrieve'.
-    - Under platforms, check 'Desktop (other)
+    - Under permissions, check "Retrieve".
+    - Under platforms, check "Desktop (other)".
     - Accept the terms and continue.
     - Make a note of the consumer ID.
 - Authorize the app. You can do this yourself, or use [this website](http://reader.fxneumann.de/plugins/oneclickpocket/auth.php) to do so. Make a note of the access token.
