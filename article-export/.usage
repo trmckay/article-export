@@ -1,4 +1,4 @@
-Usage: python3 export_pocket.py [-s state] [-c type] [-m number] [-d path] [OPTIONS]
+Usage: article-export [-s state] [-c type] [-m number] [-d path] [OPTIONS]
 
 FLAGS
     -s <state>: export only articles with the following state
