@@ -1,4 +1,4 @@
-Usage: article-export [-s state] [-c type] [-m number] [-p path] [OPTIONS]
+Usage: python3 export.py [-s state] [-c type] [-m number] [-p path] [OPTIONS]
 
 FLAGS
     -s <state>: export only articles with the following state
