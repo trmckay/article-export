@@ -136,6 +136,7 @@ def parse_flags():
             }
     for i in range(1, len(sys.argv)):
         arg = sys.argv[i]
+        if arg is None: return flags
 
         if arg == '--help': usage()
 
