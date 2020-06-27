@@ -7,7 +7,7 @@ Export your Pocket reading list as a CSV file.
 
 ### SET-UP ###
 - Run ./setup.sh to install dependencies.
-- Consider adding ./article-export/bin to your PATH.
+- Consider adding ./article-export to your PATH and alias article-export="python3 export.py" so you can use 'article-export' as a bash command.
 - Generate a new consumer ID at https://getpocket.com/developer/
     - Create new app.
     - Give it a name (i.e. article-archiver).
