@@ -1,3 +1,6 @@
+### PURPOSE ###
+Export your pocket reading list as a .csv file.
+
 ### PREREQUESITES ###
 - python3
 - pip
