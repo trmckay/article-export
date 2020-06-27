@@ -20,10 +20,10 @@ Export your Pocket reading list as a CSV file.
 
 ### USAGE ###
 
-The binary is located at ./bin/article-export. Run it with your desired flags and options. If no keys are found you will be prompted to input them. If you are filtering by source or keyword, make sure to add them to ./article-export/sources.txt and ./article-export/keywords.txt, respectively.
+Run export.py with your desired flags and options. If no keys are found you will be prompted to input them. If you are filtering by source or keyword, make sure to add them to ./article-export/sources.txt and ./article-export/keywords.txt, respectively.
 
 ```
-article-export [-s state] [-c type] [-m number] [-d path] [OPTIONS]
+python3 export.py [-s state] [-c type] [-m number] [-p path] [OPTIONS]
 
 FLAGS
     -s <state>: export only articles with the following state
@@ -38,7 +38,7 @@ FLAGS
 
     -m <number>: export a maximum of this many articles
 
-    -d <path>: save the csv output to the provided path
+    -p <path>: save the csv output to the provided path
 
 OPTIONS
     --help: show this again
