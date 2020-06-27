@@ -1,3 +1,6 @@
+### PURPOSE ###
+Export your Pocket reading list as a CSV file.
+
 ### PREREQUESITES ###
 - python3
 - pip
@@ -17,7 +20,7 @@
 
 ### USAGE ###
 
-The binary is located at ./bin/article-export. Run it with your desired flags and options. If no keys are found you will be prompted to input them.
+The binary is located at ./bin/article-export. Run it with your desired flags and options. If no keys are found you will be prompted to input them. If you are filtering by source or keyword, make sure to add them to ./article-export/sources.txt and ./article-export/keywords.txt, respectively.
 
 ```
 article-export [-s state] [-c type] [-m number] [-d path] [OPTIONS]
