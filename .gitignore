@@ -1,5 +1,5 @@
-sources.txt
-keywords.txt
+article-export/sources.txt
+article-export/keywords.txt
 __pycache__
-*.html
-*.csv
+article-export/*.csv
+article-export/*.keys
