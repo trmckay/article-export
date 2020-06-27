@@ -1,5 +1,5 @@
 ### PURPOSE ###
-Export your pocket reading list as a .csv file.
+Export your Pocket reading list as a CSV file.
 
 ### PREREQUESITES ###
 - python3
